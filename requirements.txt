@@ -1,0 +1,5 @@
+thriftpy2>=0.4.10
+httpx
+pytest
+pytest-asyncio
+async_generator; python_version < '3.7'
