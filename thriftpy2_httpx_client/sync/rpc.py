@@ -1,5 +1,5 @@
 from types import ModuleType
-from typing import Union, Protocol
+from typing import Union
 
 from thriftpy2.protocol import TProtocolBase, TBinaryProtocolFactory
 from thriftpy2.transport import TTransportBase, TBufferedTransportFactory
@@ -8,6 +8,11 @@ from thriftpy2.thrift import TClient
 import httpx
 
 from .transport import THTTPXClient
+
+try:
+    from typing import Protocol
+except ImportError:
+    from typing_extensions import Protocol
 
 
 class TProtocolFactory(Protocol):
