@@ -12,7 +12,21 @@ logger = logging.getLogger(__name__)
 
 
 class TAsyncHTTPXClient(TAsyncTransportBase):
+    """
+    Simple wrapper around HTTPX's :py:class:`~httpx.AsyncClient` to serve
+    as a ThriftPy2 async transport which uses to interface with Thrift HTTP
+    servers. It fully supports all features of HTTPX such as authentication
+    and timeouts.
+    """
+
     def __init__(self, url: Union[str, httpx.URL], **kwargs):
+        """
+        :param url:
+            URL for Thrift HTTP server. Used as the `base_url` argument
+            for :py:class:`httpx.AsyncClient`.
+        :param kwargs:
+            Extra keyword arguments for :py:class:`httpx.AsyncClient`.
+        """
         if kwargs.pop('base_url', None) is not None:
             logger.warning("Ignoring provided 'base_url', use 'url' instead.")
         self._url = httpx.URL(url)
