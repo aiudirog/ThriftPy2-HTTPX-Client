@@ -1,6 +1,7 @@
 *.py[coi]
 *.egg-info/
 .coverage
+coverage.xml
 .tox/
 build/
 coverage/
