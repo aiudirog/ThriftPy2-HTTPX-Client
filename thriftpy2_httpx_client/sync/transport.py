@@ -46,7 +46,7 @@ class THTTPXClient(TTransportBase):
         if self._client is None:
             raise TTransportException(
                 type=TTransportException.NOT_OPEN,
-                message=f"Transport is not open!",
+                message="Transport is not open!",
             )
         return self._client
 
