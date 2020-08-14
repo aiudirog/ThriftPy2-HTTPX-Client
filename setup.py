@@ -6,7 +6,7 @@ setup(
     cmdclass=versioneer.get_cmdclass(),
     install_requires=[
         "thriftpy2>=0.4.11",
-        "httpx",
+        "httpx<0.14",
         "typing_extensions; python_version < '3.8'",
     ],
 )
