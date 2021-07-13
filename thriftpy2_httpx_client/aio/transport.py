@@ -32,6 +32,9 @@ class TAsyncHTTPXClient(TAsyncTransportBase):
         self._url = httpx.URL(url)
         self._kwargs = kwargs
         kwargs['base_url'] = self._url
+        self._path = ''
+        if 'path' in kwargs:
+            self._path = kwargs.pop('path')
 
         self._client: Optional[httpx.AsyncClient] = None
         self._wbuf = io.BytesIO()
@@ -90,7 +93,7 @@ class TAsyncHTTPXClient(TAsyncTransportBase):
         self._wbuf = io.BytesIO()
 
         logger.debug("Sending request to server")
-        response = await self.client.post(url='', data=data)
+        response = await self.client.post(url=self._path, data=data)
         # Assume all content has been read
         self._rbuf = io.BytesIO(response.content)
         logger.debug(f"Received {self._rbuf.tell()} bytes")
