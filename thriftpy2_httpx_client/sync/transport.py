@@ -23,7 +23,7 @@ class THTTPXClient(TTransportBase):
     and timeouts.
     """
 
-    def __init__(self, url: Union[str, httpx.URL], **kwargs):
+    def __init__(self, url: Union[str, httpx.URL], path: str = '', **kwargs):
         """
         :param url:
             URL for Thrift HTTP server. Used as the `base_url` argument
@@ -36,9 +36,7 @@ class THTTPXClient(TTransportBase):
         self._url = httpx.URL(url)
         self._kwargs = kwargs
         kwargs['base_url'] = self._url
-        self._path = ''
-        if 'path' in kwargs:
-            self._path = kwargs.pop('path')
+        self._path = path
 
         self._client: Optional[httpx.Client] = None
         self._wbuf = io.BytesIO()
