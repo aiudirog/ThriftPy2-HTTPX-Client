@@ -24,6 +24,8 @@ class TAsyncHTTPXClient(TAsyncTransportBase):
         :param url:
             URL for Thrift HTTP server. Used as the `base_url` argument
             for :py:class:`httpx.AsyncClient`.
+        :param path:
+            Optional specific path on the server to submit requests to.
         :param kwargs:
             Extra keyword arguments for :py:class:`httpx.AsyncClient`.
         """
