@@ -19,11 +19,13 @@ class TAsyncHTTPXClient(TAsyncTransportBase):
     and timeouts.
     """
 
-    def __init__(self, url: Union[str, httpx.URL], **kwargs):
+    def __init__(self, url: Union[str, httpx.URL], path: str = '', **kwargs):
         """
         :param url:
             URL for Thrift HTTP server. Used as the `base_url` argument
             for :py:class:`httpx.AsyncClient`.
+        :param path:
+            Optional specific path on the server to submit requests to.
         :param kwargs:
             Extra keyword arguments for :py:class:`httpx.AsyncClient`.
         """
@@ -32,6 +34,7 @@ class TAsyncHTTPXClient(TAsyncTransportBase):
         self._url = httpx.URL(url)
         self._kwargs = kwargs
         kwargs['base_url'] = self._url
+        self._path = path
 
         self._client: Optional[httpx.AsyncClient] = None
         self._wbuf = io.BytesIO()
@@ -90,7 +93,7 @@ class TAsyncHTTPXClient(TAsyncTransportBase):
         self._wbuf = io.BytesIO()
 
         logger.debug("Sending request to server")
-        response = await self.client.post(url='', data=data)
+        response = await self.client.post(url=self._path, data=data)
         # Assume all content has been read
         self._rbuf = io.BytesIO(response.content)
         logger.debug(f"Received {self._rbuf.tell()} bytes")
