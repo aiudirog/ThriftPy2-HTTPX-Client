@@ -13,10 +13,7 @@ from thriftpy2_httpx_client.aio import make_client
 
 import addressbook_thrift  # noqa
 
-try:
-    from contextlib import asynccontextmanager
-except ImportError:
-    from async_generator import asynccontextmanager
+from contextlib import asynccontextmanager
 
 
 @asynccontextmanager
