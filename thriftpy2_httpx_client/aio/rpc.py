@@ -1,5 +1,5 @@
 from types import ModuleType
-from typing import Union
+from typing import Protocol, Union
 
 from thriftpy2.contrib.aio.protocol import (
     TAsyncProtocolBase,
@@ -14,11 +14,6 @@ from thriftpy2.contrib.aio.client import TAsyncClient
 import httpx
 
 from .transport import TAsyncHTTPXClient
-
-try:
-    from typing import Protocol
-except ImportError:
-    from typing_extensions import Protocol
 
 
 class TProtocolFactory(Protocol):

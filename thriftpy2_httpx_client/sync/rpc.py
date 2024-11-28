@@ -4,7 +4,7 @@
 # as necessary to ensure the implementations to do not diverge.
 ################################################################################
 from types import ModuleType
-from typing import Union
+from typing import Protocol, Union
 
 from thriftpy2.protocol import (
     TProtocolBase,
@@ -19,11 +19,6 @@ from thriftpy2.thrift import TClient
 import httpx
 
 from .transport import THTTPXClient
-
-try:
-    from typing import Protocol
-except ImportError:
-    from typing_extensions import Protocol
 
 
 class TProtocolFactory(Protocol):
